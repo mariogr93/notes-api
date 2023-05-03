@@ -1,0 +1,35 @@
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  info:
+    env:
+      enabled: true
+
+info:
+  application:
+    name: spring-blog
+    description: API for creating Notes with user auth.
+    author: Mario G.
+    version: '@project.version@'
+
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        globally_quoted_identifiers: true
+    show-sql: true
