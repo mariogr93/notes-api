@@ -39,6 +39,10 @@ public class NoteEntity {
         this.description = description;
         this.user = user;
         this.completed = completed;
-
+    }
+    public NoteEntity(String title, String description, Boolean completed) {
+        this.title = title;
+        this.description = description;
+        this.completed = completed;
     }
 }

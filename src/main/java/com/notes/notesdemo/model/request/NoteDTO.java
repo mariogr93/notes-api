@@ -1,5 +1,7 @@
 package com.notes.notesdemo.model.request;
 
+import com.notes.notesdemo.model.entity.NoteEntity;
+import com.notes.notesdemo.model.entity.UserEntity;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -18,4 +20,8 @@ public class NoteDTO {
     @NotBlank(message = "The email address is required.")
     @Email(message = "The email address is invalid.", flags = { Pattern.Flag.CASE_INSENSITIVE })
     private String userName;
+
+    public NoteEntity createNoteEntity(UserEntity user) {
+        return new NoteEntity(getTitle(), getDescription(), getCompleted(), user);
+    }
 }
