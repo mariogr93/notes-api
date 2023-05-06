@@ -19,6 +19,7 @@ import java.util.Collection;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
+    private Integer id;
     private String firstName;
     private String lastName;
     private String email;
@@ -28,7 +29,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return role.getAuthorities();
     }
 
     @Override
