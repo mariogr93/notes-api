@@ -21,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private AuthenticationService authService;
+    private final AuthenticationService authService;
 
     @PostMapping("/register")
     public GeneralResponse registrer(@RequestBody @Valid UserRegisterDTO user) {

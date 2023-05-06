@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
 
-    private AuthenticationRepository authenticationRepository;
+    private final AuthenticationRepository authenticationRepository;
 
     public UserEntity registerUser(UserRegisterDTO userRegisterDTO) {
         UserEntity user = userRegisterDTO.createUserEntity();
