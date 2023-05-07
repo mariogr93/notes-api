@@ -1,6 +1,6 @@
 package com.notes.notesdemo.model.response;
 
-//import com.notes.notesdemo.models.enums.Role;
+import com.notes.notesdemo.model.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +17,6 @@ public class UserLoginResponse {
     private String lastName;
     private String token;
     private String email;
-//    private Role role;
+    private Role role;
 
 }

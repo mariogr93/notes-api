@@ -15,7 +15,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final AuthenticationRepository authService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetailsImpl loadUserByUsername(String username) throws UsernameNotFoundException {
         return this.authService.findByEmail(username).map(user -> new UserDetailsImpl(user.getId(),
                         user.getFirstName(),
                         user.getLastName(),
