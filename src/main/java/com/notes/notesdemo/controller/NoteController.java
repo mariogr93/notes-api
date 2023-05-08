@@ -22,7 +22,7 @@ public class NoteController {
 
     private final NoteService noteService;
 
-    @GetMapping(name = "/user/{userId}")
+    @GetMapping(path = "/user/{userId}")
     public ResponseEntity<GeneralResponse> getNotesByUserId(@PathVariable Integer userId){
 
         return ResponseEntity.ok(GeneralResponse.builder()
@@ -37,7 +37,6 @@ public class NoteController {
 
     @PostMapping
     public ResponseEntity<GeneralResponse>  saveNote(@RequestBody @Valid NoteDTO note) {
-
         return ResponseEntity.ok(GeneralResponse.builder()
                 .timeStamp(now())
                 .data(Map.of("note", this.noteService.saveNote(note)))
