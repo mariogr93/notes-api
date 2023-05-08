@@ -1,5 +1,6 @@
 package com.notes.notesdemo.config;
 
+import com.notes.notesdemo.config.security.JwtAuthenticationFilter;
 import com.notes.notesdemo.config.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -22,21 +23,27 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
+import static com.notes.notesdemo.model.enums.Role.ADMIN;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
     private final UserDetailsServiceImpl userDetailsService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.authenticationProvider(authenticationProvider());
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.cors(Customizer.withDefaults())
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/**").permitAll();
+                .antMatchers("/api/v1/auth/**").permitAll()//.anyRequest().authenticated();
+                .antMatchers("/api/v1/notes/**").hasAnyRole(ADMIN.name()).anyRequest().authenticated();
         return http.build();
     }
 
