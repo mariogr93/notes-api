@@ -46,4 +46,19 @@ public class NoteController {
                 .build()
         );
     }
+
+    @DeleteMapping("/user/{userId}/delete/{noteId}")
+    public ResponseEntity<GeneralResponse> deleteNote(
+            @PathVariable Integer userId,
+            @PathVariable Integer noteId
+    ) {
+
+        return ResponseEntity.ok(GeneralResponse.builder()
+                .timeStamp(LocalDateTime.now())
+                .message("Note deleted")
+                .data(Map.of("note", this.noteService.deleteNote(userId, noteId)))
+                .status(HttpStatus.NO_CONTENT)
+                .statusCode(HttpStatus.NO_CONTENT.value())
+                .build());
+    }
 }
