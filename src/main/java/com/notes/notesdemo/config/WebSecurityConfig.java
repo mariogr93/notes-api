@@ -3,6 +3,7 @@ package com.notes.notesdemo.config;
 import com.notes.notesdemo.config.security.JwtAuthenticationFilter;
 import com.notes.notesdemo.config.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,6 +31,9 @@ import static com.notes.notesdemo.model.enums.Role.ADMIN;
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
+    @Value("${CORS_URL}")
+    private String corsURL;
+
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
@@ -50,8 +54,9 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config =  new CorsConfiguration();
-//        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedOrigin("https://645b0370afed5f67fb915697--incomparable-arithmetic-2e0016.netlify.app/");
+        config.addAllowedOrigin(corsURL);
+        //config.addAllowedOrigin("http://localhost:4200");
+        //config.addAllowedOrigin("https://645b0370afed5f67fb915697--incomparable-arithmetic-2e0016.netlify.app/");
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept", "Authorization"));
         config.setAllowCredentials(true);
